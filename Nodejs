@@ -1,0 +1,28 @@
+var http = require("http");
+var bodyParser = require('body-parser');
+var urlencodedParser = bodyParser.urlencoded({ extended: true });
+ 
+// Running Server Details.
+var server = app.listen(8080, function () {
+  var host = server.address().address
+  var port = server.address().port
+  console.log("Example app listening at %s:%s Port", host, port)
+});
+ 
+ 
+app.get('/form', function (req, res) {
+  var html='';
+  html +="<body>";
+  html += "<form action='/enter a message below'  method='post' name='form1'>";
+  html += "<input type='submit' value='submit'>";
+  html += "</form>";
+  html += "</body>";
+  res.send(html);
+});
+ 
+app.post('/Your message is here', urlencodedParser, function (req, res){
+  var reply='';
+  reply += "Your name is" + req.body.name;
+  reply += "Your E-mail id is" + req.body.email; 
+  res.send(reply);
+ });
